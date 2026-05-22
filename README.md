@@ -172,7 +172,7 @@ Umfang: ca. 10 Doppelstunden (modular kürzbar).[^mp1]
 9. Programmierung Gesamtsystem (millis‑Logik)  
 10. Systemtest, Präsentation & Reflexion  
 
-➡️ Ausführlicher Unterrichtsentwurf: [`Projekt_ArduinoSmartHome_Sequenz.md`](Projekt_ArduinoSmartHome_Sequenz.md)
+➡️ Ausführlicher Unterrichtsentwurf: [`Projekt_ArduinoSmartHome_10std.Komplett.md`](Projekt_ArduinoSmartHome_10std.Komplett.md)
 
 ---
 
