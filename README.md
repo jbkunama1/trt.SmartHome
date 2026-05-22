@@ -11,7 +11,7 @@
 
 ## 📸 Überblick
 
-![SmartHome Logo](media/SmartHome_Logo.jpg)
+![SmartHome Logo](media/SmartHome_Logo.png)
 
 Das **SmartHome Lienhard** ist ein Arduino‑basiertes Modellhaus, das zentrale Smart‑Home‑Funktionen wie **Klimamessung**, **Einparkhilfe**, **Wasseralarm** und eine **virtuelle Alarmanlage** demonstriert.[^mp1]  
 Es wurde speziell für den Einsatz im Unterricht (Sek I, Fach Technik) entwickelt und erfüllt die Anforderungen des Bildungsplans 2016 im Kompetenzbereich *Systeme und Prozesse*.[^bp]
