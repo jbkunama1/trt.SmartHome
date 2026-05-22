@@ -153,7 +153,7 @@ Dieses Repository unterstützt zwei typische Einsatzszenarien:
 - Live‑Demo der Kernfunktionen (Einparkhilfe, Klimamessung, Wasseralarm, Alarmmodus)  
 - Diskussionsanstoß zu Chancen/Risiken (Komfort, Sicherheit, Datenschutz)
 
-➡️ Ausformulierte Verlaufsplanung: [`unterricht/20min_Einstieg_SmartHome.md`](unterricht/20min_Einstieg_SmartHome.md)
+➡️ Ausformulierte Verlaufsplanung: [`20min_Einstieg_SmartHome.md`](unterricht/20min_Einstieg_SmartHome.md)
 
 ### 2. Mehrwöchiges Projekt „Smart‑Home-Modellhaus“
 
@@ -172,7 +172,7 @@ Umfang: ca. 10 Doppelstunden (modular kürzbar).[^mp1]
 9. Programmierung Gesamtsystem (millis‑Logik)  
 10. Systemtest, Präsentation & Reflexion  
 
-➡️ Ausführlicher Unterrichtsentwurf: [`unterricht/Projekt_ArduinoSmartHome_Sequenz.md`](unterricht/Projekt_ArduinoSmartHome_Sequenz.md)
+➡️ Ausführlicher Unterrichtsentwurf: [`Projekt_ArduinoSmartHome_Sequenz.md`](Projekt_ArduinoSmartHome_Sequenz.md)
 
 ---
 
