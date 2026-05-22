@@ -188,6 +188,14 @@ Jeder Baustein kann auch als eigenständige Einheit eingesetzt werden:
 
 Ideal auch für Vertretungsstunden, Projekttage oder MINT‑AGs.
 
+### Weitere Unterrichtsmaterialien
+
+Im Ordner [`unterricht/`](unterricht/) findest du zusätzliche Ressourcen für Lehrkräfte:
+
+- **[`Bewertung_SmartHome_Projekt.md`](unterricht/Bewertung_SmartHome_Projekt.md)** – Bewertungskriterien und Rubrics für Schülerleistungen  
+- **[`Lehrernotizen_Troubleshooting_SmartHome.md`](unterricht/Lehrernotizen_Troubleshooting_SmartHome.md)** – Häufige Probleme und Lösungsansätze  
+- **[`Systemtest_SmartHome_Checkliste.md`](unterricht/Systemtest_SmartHome_Checkliste.md)** – Checkliste für den Systemtest vor Einsatz im Unterricht
+
 ---
 
 ## 📂 Repository-Struktur
@@ -212,7 +220,10 @@ arduino-smarthome-lienhard/
 │  └─ video/
 ├─ /unterricht/           → Unterrichtsentwürfe, Arbeitsblätter
 │  ├─ 20min_Einstieg_SmartHome.md
-│  └─ Projekt_ArduinoSmartHome_Sequenz.md
+│  ├─ Projekt_ArduinoSmartHome_Sequenz.md
+│  ├─ Bewertung_SmartHome_Projekt.md
+│  ├─ Lehrernotizen_Troubleshooting_SmartHome.md
+│  └─ Systemtest_SmartHome_Checkliste.md
 └─ /license/
    └─ LICENSE             → MIT-Lizenztext
 ```
