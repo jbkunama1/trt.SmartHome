@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SmartHome Lienhard – Arduino-Modellhaus für den Technikunterricht (Klasse 8–10)." />
+  <title>SmartHome Lienhard – Arduino-Modellhaus</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --bg-soft:#111a2e;
+      --card:#17233d;
+      --text:#e8eefc;
+      --muted:#b9c6e4;
+      --accent:#5eead4;
+      --accent-2:#60a5fa;
+      --border:rgba(255,255,255,.12);
+      --shadow:0 12px 30px rgba(0,0,0,.25);
+    }
+    :root.light{
+      --bg:#f4f7ff;
+      --bg-soft:#eaf0ff;
+      --card:#ffffff;
+      --text:#13213f;
+      --muted:#4d5f88;
+      --accent:#0ea5a3;
+      --accent-2:#2563eb;
+      --border:rgba(22,39,78,.14);
+      --shadow:0 10px 24px rgba(37,99,235,.1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(70vw 45vw at 90% -10%, rgba(96,165,250,.28), transparent 60%),
+        radial-gradient(70vw 45vw at -10% 10%, rgba(94,234,212,.2), transparent 60%),
+        var(--bg);
+    }
+    a{color:var(--accent-2);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:1120px;margin:auto;padding:1rem}
+    .topbar{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(10px);
+      background:color-mix(in srgb, var(--bg-soft) 80%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar .wrap{
+      display:flex;gap:.6rem;align-items:center;justify-content:space-between;
+    }
+    .brand{font-weight:800;letter-spacing:.2px}
+    .controls{display:flex;gap:.5rem;align-items:center}
+    .btn{
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      border-radius:999px;
+      padding:.45rem .85rem;
+      cursor:pointer;
+      box-shadow:var(--shadow);
+      transition:.2s transform,.2s opacity;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .hero{
+      padding:2.2rem 0 1rem;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:1rem;
+      align-items:center;
+    }
+    .hero-card,.card{
+      background:linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, white 8%), var(--card));
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+    }
+    .hero-card{padding:1.3rem}
+    h1,h2,h3{line-height:1.2;margin:.2rem 0 .7rem}
+    h1{font-size:clamp(1.6rem,4vw,2.6rem)}
+    h2{font-size:clamp(1.2rem,3vw,1.8rem)}
+    h3{font-size:1.05rem}
+    .muted{color:var(--muted)}
+    .badges{display:flex;flex-wrap:wrap;gap:.45rem;margin:.8rem 0 0}
+    .badge{
+      font-size:.84rem;
+      border:1px solid var(--border);
+      background:color-mix(in srgb, var(--bg-soft) 65%, transparent);
+      border-radius:999px;
+      padding:.25rem .6rem;
+      color:var(--muted);
+    }
+    .hero-img{
+      width:100%;
+      border-radius:16px;
+      border:1px solid var(--border);
+      display:block;
+      background:#fff;
+      aspect-ratio:16/10;
+      object-fit:contain;
+    }
+    .toc{
+      margin:1rem 0 1.2rem;
+      display:flex;flex-wrap:wrap;gap:.5rem;
+    }
+    .toc a{
+      font-size:.9rem;
+      border:1px solid var(--border);
+      background:var(--card);
+      color:var(--text);
+      border-radius:12px;
+      padding:.38rem .6rem;
+    }
+    section{margin:1rem 0}
+    .card{padding:1rem}
+    .grid{display:grid;gap:1rem}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    ul,ol{margin:.25rem 0 .4rem;padding-left:1.2rem}
+    .kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+    .kpi .item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:color-mix(in srgb, var(--card) 92%, white 8%);
+      padding:.7rem;
+      text-align:center;
+    }
+    .kpi strong{display:block;font-size:1.2rem}
+    details{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:.4rem .7rem;
+      background:color-mix(in srgb, var(--bg-soft) 70%, transparent);
+    }
+    details + details{margin-top:.55rem}
+    summary{cursor:pointer;font-weight:600}
+    .footer{
+      margin:1.3rem 0 .8rem;
+      text-align:center;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    .progress{
+      position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));z-index:40;
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .grid-2,.kpi{grid-template-columns:1fr}
+      .topbar .wrap{flex-wrap:wrap}
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">🏠 SmartHome Lienhard</div>
+      <div class="controls">
+        <a class="btn" href="README.md">README</a>
+        <a class="btn" href="arduino/">Arduino</a>
+        <a class="btn" href="docs/">Docs</a>
+        <button class="btn" id="themeToggle" type="button" aria-label="Theme wechseln">🌗 Theme</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <article class="hero-card">
+        <h1>SmartHome Lienhard – Arduino-Modellhaus</h1>
+        <p class="muted">Ein modular aufgebautes Smart‑Home‑Modellhaus für den Technikunterricht (Klasse 8–10) in Baden‑Württemberg.</p>
+        <div class="badges">
+          <span class="badge">Sek I Technik</span>
+          <span class="badge">Bildungsplan BW 2016</span>
+          <span class="badge">Arduino UNO</span>
+          <span class="badge">MIT-Lizenz</span>
+        </div>
+      </article>
+      <aside class="card">
+        <img class="hero-img" src="media/SmartHome_Logo.png" alt="SmartHome Logo" />
+      </aside>
+    </section>
+
+    <nav class="toc" aria-label="Inhaltsverzeichnis">
+      <a href="#ueberblick">Überblick</a>
+      <a href="#zielgruppe">Zielgruppe</a>
+      <a href="#technik">Technisches Konzept</a>
+      <a href="#funktionen">Funktionen</a>
+      <a href="#hardware">Hardware</a>
+      <a href="#unterricht">Unterricht</a>
+      <a href="#struktur">Struktur</a>
+      <a href="#setup">Installation</a>
+      <a href="#weiter">Weiterentwicklung</a>
+      <a href="#lizenz">Lizenz</a>
+    </nav>
+
+    <section id="ueberblick" class="card">
+      <h2>📸 Überblick</h2>
+      <p>Das <strong>SmartHome Lienhard</strong> ist ein Arduino‑basiertes Modellhaus, das zentrale Smart‑Home‑Funktionen wie <strong>Klimamessung</strong>, <strong>Einparkhilfe</strong>, <strong>Wasseralarm</strong> und eine <strong>virtuelle Alarmanlage</strong> demonstriert.</p>
+      <div class="kpi">
+        <div class="item"><strong>Klasse 8–10</strong><span class="muted">Technik Sek I</span></div>
+        <div class="item"><strong>Arduino UNO</strong><span class="muted">Zentrale Steuereinheit</span></div>
+        <div class="item"><strong>EVA-Prinzip</strong><span class="muted">Eingabe → Verarbeitung → Ausgabe</span></div>
+      </div>
+    </section>
+
+    <section id="zielgruppe" class="card">
+      <h2>🎯 Zielgruppe & Kontext</h2>
+      <ul>
+        <li>Schulart: Realschule / Gemeinschaftsschule Sek I</li>
+        <li>Fach: Technik (Wahlpflichtfach)</li>
+        <li>Klassenstufen: 8–10</li>
+        <li>Typischer Einsatz: MP1-Modellprüfung, Projektunterricht, Demo-Objekt (MINT-Tage / Elternabende)</li>
+      </ul>
+    </section>
+
+    <section id="technik" class="grid grid-2">
+      <article class="card">
+        <h2>🧠 Technisches Konzept</h2>
+        <p>Das Modell folgt dem <strong>EVA‑Prinzip</strong>.</p>
+        <details open>
+          <summary>Eingabe (Sensoren)</summary>
+          <ul>
+            <li>DHT-Sensor (Temperatur / Luftfeuchte)</li>
+            <li>HC‑SR04 (Distanzmessung)</li>
+            <li>Water-Sensor analog (Feuchtigkeit / Wasser)</li>
+            <li>Taster A3 (Virtueller Alarm EIN/AUS)</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Verarbeitung (Mikrocontroller)</summary>
+          <ul>
+            <li>Arduino UNO als Zentrale</li>
+            <li>Nicht-blockierende Logik mit <code>millis()</code></li>
+            <li>Zustandsautomaten für Alarm, Wasseralarm und Anzeigewechsel</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Ausgabe (Aktoren)</summary>
+          <ul>
+            <li>LED-Ampel (Grün/Gelb/Rot)</li>
+            <li>Buzzer als akustischer Alarm</li>
+            <li>20x4 I²C-LCD / OLED für Messwerte und Status</li>
+          </ul>
+        </details>
+      </article>
+
+      <article id="funktionen" class="card">
+        <h2>🧩 Realisierte Funktionen (v1.5)</h2>
+        <ul>
+          <li>Klimamessung mit DHT (Temperatur & Luftfeuchte)</li>
+          <li>Einparkhilfe mit HC‑SR04 und Ampellogik (Grün/Gelb/Rot)</li>
+          <li>Virtueller Alarm per Taster A3 mit Display-Hinweisen und Blinksequenzen</li>
+          <li>Wasseralarm mit Meldung „WASSER ALARM!“ und Balkenanzeige</li>
+          <li>Rotierende Statusmeldungen im Normalbetrieb</li>
+        </ul>
+        <p><a href="arduino/">Zum Arduino-Ordner</a></p>
+      </article>
+    </section>
+
+    <section id="hardware" class="grid grid-2">
+      <article class="card">
+        <h2>🧱 Hardware-Setup</h2>
+        <h3>Zentrale Komponenten</h3>
+        <ul>
+          <li>Arduino UNO / kompatibles Board</li>
+          <li>DHT-Sensor</li>
+          <li>HC‑SR04 Ultraschallsensor</li>
+          <li>Analoger Water-Sensor</li>
+          <li>3× LEDs + Vorwiderstände</li>
+          <li>Taster, 20x4 I²C-LCD oder OLED</li>
+          <li>Breadboard, Jumper-Kabel, USB-Kabel</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>🛠 Mechanik & 3D-Druck</h2>
+        <ul>
+          <li>Grundplatte DIN A3 (Sperrholz/MDF)</li>
+          <li>3D-gedrucktes Haus (Korpus + Dach)</li>
+          <li>Halterungen für DHT, HC‑SR04, Water-Sensor</li>
+          <li>Ampelgehäuse, Elektronikwanne, Kabelkanäle</li>
+        </ul>
+        <p><a href="docs/">Stücklisten/Dokumente (docs)</a> · <a href="3d-print/">3D-Print-Ordner</a></p>
+      </article>
+    </section>
+
+    <section id="unterricht" class="card">
+      <h2>📚 Einsatz im Unterricht</h2>
+      <details open>
+        <summary>20‑Minuten‑Einstiegseinheit</summary>
+        <ul>
+          <li>Impuls zu Smart‑Home im Alltag</li>
+          <li>EVA-Prinzip</li>
+          <li>Live-Demo der Kernfunktionen</li>
+          <li>Chancen/Risiken: Komfort, Sicherheit, Datenschutz</li>
+        </ul>
+        <p><a href="20min_Einstieg_SmartHome.md">20min_Einstieg_SmartHome.md</a></p>
+      </details>
+      <details>
+        <summary>Mehrwöchiges Projekt (ca. 10 Doppelstunden)</summary>
+        <ol>
+          <li>Systemanalyse & EVA</li>
+          <li>Arduino-Basics & LEDs</li>
+          <li>Sensorik</li>
+          <li>Aktorik</li>
+          <li>Mechanik / Aufbau</li>
+          <li>3D-Druck</li>
+          <li>Verdrahtung & Teiltests</li>
+          <li>Fehlersuche & Kabelmanagement</li>
+          <li>Programmierung Gesamtsystem</li>
+          <li>Systemtest, Präsentation, Reflexion</li>
+        </ol>
+        <p><a href="Projekt_ArduinoSmartHome_10std.Komplett.md">Projekt_ArduinoSmartHome_10std.Komplett.md</a></p>
+      </details>
+    </section>
+
+    <section id="struktur" class="card">
+      <h2>📂 Repository-Struktur</h2>
+      <div class="grid grid-2">
+        <div>
+          <ul>
+            <li><a href="README.md">README.md</a></li>
+            <li><a href="arduino/">/arduino/</a></li>
+            <li><a href="docs/">/docs/</a></li>
+            <li><a href="3d-print/">/3d-print/</a></li>
+            <li><a href="media/">/media/</a></li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><a href="infografik/">/infografik/</a></li>
+            <li><a href="LICENSE">LICENSE</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="setup" class="card">
+      <h2>⚙️ Installation & Inbetriebnahme (Kurz)</h2>
+      <ol>
+        <li>Repository klonen / Dateien laden</li>
+        <li><code>arduino/SmartHome_V1_5_Water.ino</code> in der Arduino IDE öffnen</li>
+        <li>Bibliotheken installieren: DHT, LiquidCrystal_I2C (oder SSD1306), Wire</li>
+        <li>Schaltplan aufbauen / Modell anschließen</li>
+        <li>Sketch hochladen und Funktionen testen</li>
+      </ol>
+    </section>
+
+    <section id="weiter" class="grid grid-2">
+      <article class="card">
+        <h2>🧩 Weiterentwicklungsideen</h2>
+        <ul>
+          <li>ESP32 + WLAN/Web-Dashboard</li>
+          <li>Weitere Sensoren (LDR, Regen, Gas)</li>
+          <li>Datenlogging (Temp, Feuchte, Abstand, Wasserstand)</li>
+          <li>Energieauswertungen / neue Anwendungsfälle</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h2>🤝 Mitmachen</h2>
+        <p>Pull Requests mit Code‑Verbesserungen, Unterrichtsbausteinen oder Übersetzungen sind willkommen.</p>
+        <p><a href="README.md">Vollständige Projektbeschreibung in README.md</a></p>
+      </article>
+    </section>
+
+    <section id="lizenz" class="card">
+      <h2>📜 Lizenz</h2>
+      <p>Dieses Projekt steht unter der <strong>MIT-Lizenz</strong>.</p>
+      <p>© 2026 Daniel Lienhard · <a href="LICENSE">Lizenzdatei öffnen</a></p>
+    </section>
+
+    <p class="footer">Erstellt aus dem README für GitHub Pages · Modern · Responsive · Interaktiv</p>
+  </main>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') root.classList.add('light');
+
+      const toggle = document.getElementById('themeToggle');
+      toggle.addEventListener('click', () => {
+        root.classList.toggle('light');
+        localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+      });
+
+      const progress = document.getElementById('progress');
+      const onScroll = () => {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop / (h.scrollHeight - h.clientHeight || 1);
+        progress.style.width = (scrolled * 100).toFixed(2) + '%';
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
