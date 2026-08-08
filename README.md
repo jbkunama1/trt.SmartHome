@@ -4,7 +4,7 @@
 [![Curriculum](https://img.shields.io/badge/Bildungsplan-BW%202016-success)](#-bildungsplan--kompetenzen)
 [![Arduino](https://img.shields.io/badge/Platform-Arduino%20UNO-orange)](#-technisches-konzept)
 [![License](https://img.shields.io/badge/License-MIT-lightgrey)](#-lizenz)
-[![Buy me a coffee](https://cdn.buymeacoffee.com/buttons/default-orange.png)](https://www.buymeacoffee.com/highfish)
+[![Buy me a coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/highfish)
 > Ein modular aufgebautes Smart‑Home-Modellhaus für den Technikunterricht (Klasse 8–10) in Baden‑Württemberg.
 
 ---
